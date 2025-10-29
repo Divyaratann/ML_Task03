@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support Chatbot - Live Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 600px;
+        }
+        
+        .left-panel {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .right-panel {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .features li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .features li:before {
+            content: "✓";
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+        
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .chat-header h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .bot-iframe {
+            flex: 1;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .stats h4 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4facfe;
+        }
+        
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #4facfe;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #3d8bfe;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+            
+            .left-panel {
+                padding: 30px;
+            }
+            
+            .right-panel {
+                padding: 30px;
+            }
+            
+            .bot-iframe {
+                min-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="header">
+                <h1>🤖 Customer Support Bot</h1>
+                <p>AI-Powered 24/7 Customer Support</p>
+            </div>
+            
+            <ul class="features">
+                <li>Order Status & Tracking</li>
+                <li>Shipping Information</li>
+                <li>Returns & Refunds</li>
+                <li>Payment Support</li>
+                <li>Product Information</li>
+                <li>Account Assistance</li>
+                <li>24/7 Availability</li>
+                <li>Multi-language Support</li>
+            </ul>
+            
+            <div class="stats">
+                <h4>📊 Live Statistics</h4>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-value">10M+</div>
+                        <div class="stat-label">Bots on Platform</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Availability</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">&lt;1s</div>
+                        <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">95%</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3>💬 Chat with our AI Assistant</h3>
+                    <p>Ask me about orders, shipping, returns, payments, or any other support questions!</p>
+                </div>
+                
+                <iframe 
+                    class="bot-iframe"
+                    src="https://bot.dialogflow.com/826bc631-37f7-4d24-ba69-6f73fae1fe1c"
+                    title="Customer Support Chatbot">
+                </iframe>
+                
+                <div class="demo-buttons">
+                    <a href="#" class="btn btn-primary" onclick="testBot()">Test Bot</a>
+                    <a href="streamlit_app.py" class="btn btn-secondary">Streamlit App</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function testBot() {
+            // Simulate testing the bot
+            alert('Bot is ready! Try asking:\n\n• "Where is my order?"\n• "How long does shipping take?"\n• "I want to return this item"\n• "What payment methods do you accept?"');
+        }
+        
+        // Add some interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Customer Support Bot Interface Loaded');
+            console.log('Bot ID: 826bc631-37f7-4d24-ba69-6f73fae1fe1c');
+            
+            // Update timestamp
+            const now = new Date();
+            console.log('Interface loaded at:', now.toISOString());
+        });
+    </script>
+</body>
+</html>
